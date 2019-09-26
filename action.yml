@@ -1,0 +1,19 @@
+name: "Mirroring Repository"
+description: "Mirror a repository to another repository on GitHub, GitLab, BitBucket, AWS CodeCommit, etc."
+branding:
+  icon: "archive"
+  color: "blue"
+inputs:
+  ssh_private_key:
+    description: "SSH private key for ssh connection to the target repository"
+    required: false
+  target_repo_url:
+    description: "Target url"
+    required: true
+  ssh_username:
+    description: "Username for ssh connection"
+    required: false
+    default: "git"
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
