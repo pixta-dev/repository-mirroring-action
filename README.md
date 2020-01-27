@@ -10,7 +10,7 @@ This will copy all commits, branches and tags.
 
 Customize following example workflow and save as .github/workflows/main.yml on your source repository.
 
-cf. [Creating and using secrets](https://help.github.com/en/articles/virtual-environments-for-github-actions#creating-and-using-secrets-encrypted-variables) .
+cf. [Creating and using secrets](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets) .
 
 ```yaml
 name: Mirroring
