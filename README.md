@@ -21,7 +21,7 @@ jobs:
   to_gitlab:
     runs-on: ubuntu-18.04
     steps:                                              # <-- must use actions/checkout@v1 before mirroring!
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - uses: pixta-dev/repository-mirroring-action@v1
       with:
         target_repo_url:
@@ -32,7 +32,7 @@ jobs:
   to_codecommit:                                        # <-- different jobs are executed in parallel.
     runs-on: ubuntu-18.04
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - uses: pixta-dev/repository-mirroring-action@v1
       with:
         target_repo_url:
