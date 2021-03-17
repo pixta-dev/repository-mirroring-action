@@ -11,9 +11,9 @@ This will copy all commits, branches and tags.
 Customize following example workflow (namely replace `<username>/<target_repository_name>` with the right information) and save as `.github/workflows/main.yml` on your source repository.
 
 To find out how to create and add the `GITLAB_SSH_PRIVATE_KEY`, follow the steps below:
-- [How to generate an SSH key pair](https://docs.gitlab.com/ee/ssh/#generate-an-ssh-key-pair). Recommended encryption would be _at least_ `2048-bit RSA`.
-- Add the _public_ key to [your gitlab account](https://gitlab.com/-/profile/keys)
-- Add the _private_ key as a secret to your workflow. More information on [creating and using secrets](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets).
+1. [How to generate an SSH key pair](https://docs.gitlab.com/ee/ssh/#generate-an-ssh-key-pair). Recommended encryption would be _at least_ `2048-bit RSA`.
+2. Add the _public_ key to [your gitlab account](https://gitlab.com/-/profile/keys)
+3. Add the _private_ key as a secret to your workflow. More information on [creating and using secrets](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets).
 
 
 ```yaml
