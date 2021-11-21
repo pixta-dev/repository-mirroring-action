@@ -1,0 +1,29 @@
+name: Test
+on:
+  delete:
+  push:
+  pull_request:
+    branches:
+      - master
+jobs:
+  check_preconditions:
+    runs-on: ubuntu-latest
+    outputs:
+      results: ${{ join(steps.*.outcome) }}
+    steps:
+      - id: secrets
+        continue-on-error: true
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          TARGET_REPO_URL: ${{ secrets.TARGET_REPO_URL }}
+        run: '[ -n "$SSH_PRIVATE_KEY" ] && [ -n "$TARGET_REPO_URL" ]'
+  mirroring:
+    needs: check_preconditions
+    if: "!contains(needs.check_preconditions.outputs.results, 'failure')"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: ./
+        with:
+          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+          target_repo_url: ${{ secrets.TARGET_REPO_URL }}
