@@ -22,7 +22,9 @@ jobs:
     if: "!contains(needs.check_preconditions.outputs.results, 'failure')"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - uses: ./
         with:
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
