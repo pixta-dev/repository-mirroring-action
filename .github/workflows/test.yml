@@ -23,7 +23,7 @@ jobs:
     if: "!contains(needs.check_preconditions.outputs.results, 'failure')"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v3.3.0
         with:
           fetch-depth: 0
       - uses: ./
