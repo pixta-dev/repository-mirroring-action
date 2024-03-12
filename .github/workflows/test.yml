@@ -17,7 +17,7 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           TARGET_REPO_URL: ${{ secrets.TARGET_REPO_URL }}
-        run: '[ -n "$SSH_PRIVATE_KEY" ]&& [ -n "$TARGET_REPO_URL" ]'
+        run: '[ -n "$SSH_PRIVATE_KEY" ] && [ -n "$TARGET_REPO_URL" ]'
   mirroring:
     needs: check_preconditions
     if: "!contains(needs.check_preconditions.outputs.results, 'failure')"
