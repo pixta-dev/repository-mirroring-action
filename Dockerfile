@@ -1,12 +1,14 @@
 FROM alpine:3.10
 
 RUN apk update && apk upgrade && \
-    apk add --no-cache git openssh git-lfs
+    apk add --no-cache git openssh git-lfs expect
 
 RUN git lfs install
 
-COPY setup-ssh.sh /setup-ssh.sh
+RUN mkdir -p /root/.ssh && \
+    touch /root/.ssh/known_hosts && \
+    ssh-keyscan github.com >> /root/.ssh/known_hosts
+
 COPY mirror.sh /mirror.sh
-COPY cleanup.sh /cleanup.sh
 
 ENTRYPOINT ["/mirror.sh"]

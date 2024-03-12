@@ -17,16 +17,17 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           TARGET_REPO_URL: ${{ secrets.TARGET_REPO_URL }}
-        run: '[ -n "$SSH_PRIVATE_KEY" ] && [ -n "$TARGET_REPO_URL" ]'
+        run: '[ -n "$SSH_PRIVATE_KEY" ]&& [ -n "$TARGET_REPO_URL" ]'
   mirroring:
     needs: check_preconditions
     if: "!contains(needs.check_preconditions.outputs.results, 'failure')"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4.1.1
         with:
           fetch-depth: 0
       - uses: ./
         with:
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
           target_repo_url: ${{ secrets.TARGET_REPO_URL }}
+          ssh_private_key_passphrase: ${{ secrets.SSH_PRIVATE_KEY_PASSPHRASE }}

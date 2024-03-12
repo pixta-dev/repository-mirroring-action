@@ -1,0 +1,11 @@
+version: "3.9"
+
+services:
+  repository-mirroring-action:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    image: repository-mirroring-action
+    container_name: mirror
+    env_file:
+      - .env
