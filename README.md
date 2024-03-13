@@ -40,7 +40,7 @@ jobs:
             ${{ secrets.GITHUB_SSH_PRIVATE_KEY_PASSPHRASE }}
           ssh_username: git                             # <-- do NOT pass this argument unless equal to 'git' for github job.
 
-to_gitlab:
+  to_gitlab:
     runs-on: ubuntu-latest
     steps:                                              # <-- must use actions/checkout before mirroring!
       - uses: actions/checkout@v4.1.1
