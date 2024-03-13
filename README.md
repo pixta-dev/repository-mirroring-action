@@ -24,10 +24,26 @@ name: Mirroring
 on: [push, delete]
 
 jobs:
+  to_github:
+    runs-on: ubuntu-latest
+    steps:                                              # <-- must use actions/checkout before mirroring!
+      - uses: actions/checkout@v4.1.1
+        with:
+          fetch-depth: 0
+      - uses: pixta-dev/repository-mirroring-action@v1
+        with:
+          target_repo_url:
+            git@github.com:<username>/<target_repository_name>.git
+          ssh_private_key:                              # <-- use 'secrets' to pass credential information.
+            ${{ secrets.GITHUB_SSH_PRIVATE_KEY }}
+          ssh_private_key_passphrase:                   # <-- used to allow the private key usage (optional).
+            ${{ secrets.GITHUB_SSH_PRIVATE_KEY_PASSPHRASE }}
+          ssh_username: git                             # <-- do NOT pass this argument unless equal to 'git' for github job.
+
   to_gitlab:
     runs-on: ubuntu-latest
     steps:                                              # <-- must use actions/checkout before mirroring!
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4.1.1
         with:
           fetch-depth: 0
       - uses: pixta-dev/repository-mirroring-action@v1
@@ -36,11 +52,13 @@ jobs:
             git@gitlab.com:<username>/<target_repository_name>.git
           ssh_private_key:                              # <-- use 'secrets' to pass credential information.
             ${{ secrets.GITLAB_SSH_PRIVATE_KEY }}
+          ssh_private_key_passphrase:                   # <-- used to allow the private key usage (optional).
+            ${{ secrets.GITLAB_SSH_PRIVATE_KEY_PASSPHRASE }}
 
   to_codecommit:                                        # <-- different jobs are executed in parallel.
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4.1.1
         with:
           fetch-depth: 0
       - uses: pixta-dev/repository-mirroring-action@v1
@@ -51,4 +69,6 @@ jobs:
             ${{ secrets.CODECOMMIT_SSH_PRIVATE_KEY }}
           ssh_username:                                 # <-- (for codecommit) you need to specify ssh-key-id as ssh username.
             ${{ secrets.CODECOMMIT_SSH_PRIVATE_KEY_ID }}
+          ssh_private_key_passphrase:                   # <-- used to allow the private key usage (optional).
+            ${{ secrets.CODECOMMIT_SSH_PRIVATE_KEY_PASSPHRASE }}
 ```

@@ -4,16 +4,20 @@ branding:
   icon: "archive"
   color: "blue"
 inputs:
-  ssh_private_key:
-    description: "SSH private key for ssh connection to the target repository"
-    required: false
   target_repo_url:
     description: "Target url"
     required: true
+  ssh_private_key:
+    description: "SSH private key for ssh connection to the target repository"
+    required: true
+  ssh_private_key_passphrase:
+    description: "SSH private key passphrase"
+    required: false
   ssh_username:
     description: "Username for ssh connection"
     required: false
     default: "git"
+
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
+  using: "docker"
+  image: "Dockerfile"
